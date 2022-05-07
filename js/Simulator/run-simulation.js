@@ -1,29 +1,27 @@
 import {candle, layout, trend} from '../Graph/graph.js';
 import { Simulator } from './simulator.js';
 import { csvToArray } from '../Additional/csv-to-array.js'
+import { rawData } from '../Additional/test-data.js'
+import { Table } from '../Additional/table.js'
 
 function Setup(){
     // Test Data - inladen
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const text = e.target.result;
-        csvData = csvToArray(text);
-        simulator.SetData(csvData)
-        CreateForm(csvData)
-        CreateTable("table-2", csvData, 500)
-        };
-    //reader.readAsText(".../Data/BNB-USD(1).csv");
-    // console.log(rawData)
+    let candleData = csvToArray(rawData)
     // ------
 
-    let file = document.getElementById("fileInput")
-    file.addEventListener("change", e=>{
-        console.log(e.path)
-
-    })
+    let showDataBtn = document.getElementById("show-data")
+    let t = document.getElementById("table")
     let graph = document.getElementById('graph');
-    console.log(graph)
-    let simulator = new Simulator(graph) 
+
+    let table = new Table(t)
+    table.SetHeader(candleData[0])
+
+    let simulator = new Simulator(graph, table)
+    simulator.StartSimulation(candleData)
+
+    showDataBtn.addEventListener("click", e => {
+        simulator.ShowTable(e.target.checked)
+    })
 }
 
 

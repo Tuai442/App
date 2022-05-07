@@ -1,4 +1,4 @@
-class Table{
+export class Table{
     
     constructor(root, width){
         this.root = root
@@ -27,7 +27,7 @@ class Table{
         // nog voorzien
     }
 
-    setHeader(headerColumns){ 
+    SetHeader(headerColumns){ 
         this.columnLength = headerColumns.length
         console.log(headerColumns)
         headerColumns.forEach(h =>{
@@ -40,6 +40,15 @@ class Table{
 
         })
         
+    }
+
+    Show(show){
+        if(show){
+            this.root.style.display = "block"
+        }
+        else{
+            this.root.style.display = "none"
+        }
     }
 
 }
