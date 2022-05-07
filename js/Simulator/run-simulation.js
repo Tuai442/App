@@ -1,8 +1,8 @@
-import {candle, layout, trend} from '../Graph/graph.js';
 import { Simulator } from './simulator.js';
 import { csvToArray } from '../Additional/csv-to-array.js'
 import { rawData } from '../Additional/test-data.js'
 import { Table } from '../Additional/table.js'
+import { Strategy } from '../Strategy/strategy.js'
 
 function Setup(){
     // Test Data - inladen
@@ -16,6 +16,8 @@ function Setup(){
     let table = new Table(t)
     table.SetHeader(candleData[0])
 
+
+    let strategy = new Strategy()
     let simulator = new Simulator(graph, table)
     simulator.StartSimulation(candleData)
 
